@@ -51,6 +51,9 @@ solver.solve()
 
 
 #save the solution
+file = File('u.pvd')
+file << u_
+
 u1, u2 = u_.split()
 s = interpolate(Expression('pow(f1*f1+f2*f2,0.5)',f1=u1,f2=u2,degree=2),W)
 
@@ -60,7 +63,6 @@ file = File('u2.pvd')
 file << u2
 file = File('s.pvd')
 file << s
-
 
 #plot the solution
 
