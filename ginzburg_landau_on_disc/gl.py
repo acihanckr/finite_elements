@@ -14,7 +14,7 @@ ffc_options={'optimize':True,'eliminate_zeros':True,'precompute_basis_const':Tru
 
 #create the mesh*
 
-mesh = Mesh('disc2.xml')
+mesh = Mesh('disc.xml')
 
 
 
