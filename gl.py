@@ -20,8 +20,7 @@ W = FunctionSpace(mesh,'Lagrange',1)
 #define boundary conditions
 f = Expression(('-1*x[1]','x[0]'),degree = 2)
 def boundary(x,on_boundary):
-    r = pow(x[0]*x[0]+x[1]*x[1],0.5)
-    return near(r,1.0,0.01)
+    return on_boundary
 
 bc = DirichletBC(V,f,boundary)
 
@@ -42,12 +41,26 @@ J = derivative(F,u_,u)
 
 problem = NonlinearVariationalProblem(F,u_,bc,J)
 solver = NonlinearVariationalSolver(problem)
+
+solver.parameters['newton_solver']['absolute_tolerance']=1E-6
+solver.parameters['newton_solver']['maximum_iterations']=10000
+
 solver.solve()
 
 
 
+
 #save the solution
- 
+u1, u2 = u_.split()
+s = interpolate(Expression('pow(f1*f1+f2*f2,0.5)',f1=u1,f2=u2,degree=2),W)
+
+file = File('u1.pvd') 
+file << u1
+file = File('u2.pvd')
+file << u2
+file = File('s.pvd')
+file << s
+
 
 #plot the solution
 

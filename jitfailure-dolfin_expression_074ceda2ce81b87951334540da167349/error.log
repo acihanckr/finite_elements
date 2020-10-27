@@ -1,4 +1,0 @@
-/tmp/tmpozd5ghp6/dolfin_expression_074ceda2ce81b87951334540da167349.cpp: In member function ‘virtual void dolfin::dolfin_expression_074ceda2ce81b87951334540da167349::eval(Eigen::Ref<Eigen::Matrix<double, -1, 1> >, Eigen::Ref<const Eigen::Matrix<double, -1, 1> >) const’:
-/tmp/tmpozd5ghp6/dolfin_expression_074ceda2ce81b87951334540da167349.cpp:61:29: error: expected ‘)’ before ‘;’ token
-           values[0] = -(x[1];
-                             ^
