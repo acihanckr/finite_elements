@@ -2,13 +2,19 @@ from fenics import *
 
 
 
-n = 30
+
 eps = 0.01
+
+
+parameters['allow_extrapolation']=True
+
+parameters['form_compiler']['cpp_optimize']=True
+ffc_options={'optimize':True,'eliminate_zeros':True,'precompute_basis_const':True,'precompute_ip_const':True}
 
 
 #create the mesh*
 
-mesh = Mesh('disc.xml')
+mesh = Mesh('disc2.xml')
 
 
 
