@@ -18,7 +18,7 @@ W = FunctionSpace(mesh,'Lagrange',1)
 
 
 #define boundary conditions
-f = Expression(('-1*x[1]','x[0]'),degree = 2)
+f = Expression(('x[0]','x[1]'),degree = 2)
 def boundary(x,on_boundary):
     return on_boundary
 
