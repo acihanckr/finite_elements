@@ -3,7 +3,7 @@ from fenics import *
 
 
 
-eps = 0.01
+eps = 0.1
 
 
 parameters['allow_extrapolation']=True
@@ -62,13 +62,17 @@ file << u_
 
 u1, u2 = u_.split()
 s = interpolate(Expression('pow(f1*f1+f2*f2,0.5)',f1=u1,f2=u2,degree=2),W)
+uu = interpolate(Expression(('f1','f2'),f1=u1,f2=u2,degree = 2),V)
 
-file = File('u1.pvd') 
+file = File('u1.pvd')
 file << u1
 file = File('u2.pvd')
 file << u2
 file = File('s.pvd')
 file << s
+file = File('uu.pvd')
+file << uu
+
 
 #plot the solution
 
