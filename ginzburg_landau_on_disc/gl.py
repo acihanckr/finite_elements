@@ -1,8 +1,5 @@
 from fenics import *
 
-
-
-
 eps = 0.1
 
 
@@ -12,13 +9,13 @@ parameters['form_compiler']['cpp_optimize']=True
 ffc_options={'optimize':True,'eliminate_zeros':True,'precompute_basis_const':True,'precompute_ip_const':True}
 
 
-#create the mesh*
+#create the mesh
 
 mesh = Mesh('disc.xml')
 
 
 
-#define vector spaces*
+#define vector spaces
 V = VectorFunctionSpace(mesh, 'Lagrange', 1, dim=2)
 W = FunctionSpace(mesh,'Lagrange',1)
 
@@ -30,13 +27,13 @@ def boundary(x,on_boundary):
 
 bc = DirichletBC(V,f,boundary)
 
-#define trial and test function*
+#define trial and test function
 u = TrialFunction(V)
 v1, v2 = TestFunctions(V)
 u1, u2  = split(u)
 
 #define variational problem
-a = eps*dot(grad(u1),grad(v1))*dx+dot(grad(u2),grad(v2))*dx+(u1*u1+u2*u2-1)*(u1*v1+u2*v2)/eps*dx
+a = eps*dot(grad(u1),grad(v1))*dx+eps*dot(grad(u2),grad(v2))*dx+(u1*u1+u2*u2-1)*(u1*v1+u2*v2)/eps*dx
 
 
 #solve variational problem
@@ -62,7 +59,6 @@ file << u_
 
 u1, u2 = u_.split()
 s = interpolate(Expression('pow(f1*f1+f2*f2,0.5)',f1=u1,f2=u2,degree=2),W)
-uu = interpolate(Expression(('f1','f2'),f1=u1,f2=u2,degree = 2),V)
 
 file = File('u1.pvd')
 file << u1
@@ -70,9 +66,7 @@ file = File('u2.pvd')
 file << u2
 file = File('s.pvd')
 file << s
-file = File('uu.pvd')
-file << uu
 
 
-#plot the solution
+
 
